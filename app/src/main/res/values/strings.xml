@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">To do list</string>
+    <string name="pt_tasks">Tarefas</string>
+    <string name="pt_add_task_task_title">Título</string>
+    <string name="pt_add_task_date_text_field">Data</string>
+    <string name="pt_add_task_time_text_field">Hora</string>
+    <string name="pt_create_task">Criar Tarefa</string>
+    <string name="pt_cancel">Cancelar</string>
 </resources>
