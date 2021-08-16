@@ -33,21 +33,23 @@ class AddTaskActivity : AppCompatActivity() {
             datePicker.addOnPositiveButtonClickListener {
                 val timeZone = TimeZone.getDefault()
                 val offset = timeZone.getOffset(Date().time) * -1
-                binding.dateTextField.text = Date(it+ offset).format()
+                binding.dateTextField.text = Date(it + offset).format()
             }
             datePicker.show(supportFragmentManager, "DATE_PICKER_TAG")
         }
 
-        binding.timeTextField.editText?.setOnClickListener{
+        binding.timeTextField.editText?.setOnClickListener {
             val timePicker = MaterialTimePicker.Builder()
                 .setTimeFormat(TimeFormat.CLOCK_24H)
                 .setTitleText("Selecione um horário")
                 .build()
 
             timePicker.addOnPositiveButtonClickListener {
-                val timeText:String = if(timePicker.minute in 1..9) {
+                val timeText: String = if (timePicker.minute in 1..9) {
                     "${timePicker.hour}:0${timePicker.minute}"
-                } else {"${timePicker.hour}:${timePicker.minute}"}
+                } else {
+                    "${timePicker.hour}:${timePicker.minute}"
+                }
                 binding.timeTextField.text = timeText
             }
 
@@ -59,6 +61,12 @@ class AddTaskActivity : AppCompatActivity() {
         }
         binding.createTaskButton.setOnClickListener {
 
+            val task = Task(
+                title = binding.titleTextField.text,
+                date = binding.dateTextField.text,
+                time = binding.timeTextField.text,
+            )
+            TaskDataSource.insertTask(task)
         }
     }
 }
