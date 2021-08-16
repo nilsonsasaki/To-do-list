@@ -3,6 +3,8 @@ package com.nilsonsasaki.todolist.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.timepicker.MaterialTimePicker
+import com.google.android.material.timepicker.TimeFormat
 import com.nilsonsasaki.todolist.databinding.ActivityAddTaskBinding
 import com.nilsonsasaki.todolist.extensions.format
 import com.nilsonsasaki.todolist.extensions.text
@@ -30,6 +32,25 @@ class AddTaskActivity : AppCompatActivity() {
                 binding.dateTextField.text = Date(it+ offset).format()
             }
             datePicker.show(supportFragmentManager, "DATE_PICKER_TAG")
+        }
+
+        binding.timeTextField.editText?.setOnClickListener{
+            val timePicker = MaterialTimePicker.Builder()
+                .setTimeFormat(TimeFormat.CLOCK_24H)
+                .setTitleText("Selecione um horário")
+                .build()
+
+            timePicker.addOnPositiveButtonClickListener {
+                fun timeText():String {
+                    if(timePicker.minute<10){
+                        return "${timePicker.hour} : 0${timePicker.minute}"
+                    }
+                    return "${timePicker.hour} : ${timePicker.minute}"
+                }
+                binding.timeTextField.text = timeText()
+            }
+
+            timePicker.show(supportFragmentManager, null)
         }
     }
 }
