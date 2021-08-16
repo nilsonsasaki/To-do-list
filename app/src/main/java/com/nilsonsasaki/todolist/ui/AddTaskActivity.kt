@@ -52,5 +52,12 @@ class AddTaskActivity : AppCompatActivity() {
 
             timePicker.show(supportFragmentManager, null)
         }
+
+        binding.cancelButton.setOnClickListener {
+            finish()
+        }
+        binding.createTaskButton.setOnClickListener {
+            //TODO : Create task button functionality
+        }
     }
 }
